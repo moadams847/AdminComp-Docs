@@ -9,7 +9,7 @@ navLink.on("mouseleave", function () {
   $(this).removeClass("border-bottom border-altprimary border-1");
 });
 
-// dynamic date=======
+// dynamic date=====
 const now = new Date();
 const currentYear = now.getFullYear();
 // console.log(`get full year: ${currentYear}`);
