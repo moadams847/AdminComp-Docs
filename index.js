@@ -51,10 +51,11 @@ const addQuestionsAndAnswers = (data, id) => {
   accordion.innerHTML += html;
 };
 
+// =======================================================================
 // ---
 // real time listener
 
-// delete in real time
+// delete in real time from ui
 const deleteQuestionsAndAnswers = (id) => {
   const accordionItems = document.querySelectorAll(".accordion-item");
   accordionItems.forEach((accordionItem) => {
@@ -64,14 +65,38 @@ const deleteQuestionsAndAnswers = (id) => {
   });
 };
 
-// retrieve data in real time
-const unsub = db.collection("Q&A").onSnapshot((snapshot) => {
-  snapshot.docChanges().forEach((change) => {
-    const doc = change.doc;
-    if (change.type === "added") {
-      addQuestionsAndAnswers(doc.data(), doc.id);
-    } else if (change.type === "removed") {
-      deleteQuestionsAndAnswers(doc.id);
+// ================================================
+// // edit ui
+const editQuestion = (data, id) => {
+  const accordionItems = document.querySelectorAll(".accordion-item");
+  const accordionButton = document.querySelector(".accordion-button");
+  const accordionBody = document.querySelector(".accordion-body");
+
+  accordionItems.forEach((accordionItem) => {
+    if (accordionItem.getAttribute("data-id") === id) {
+      console.log(data);
+      console.log(accordionButton.textContent);
+      accordionButton.textContent = data.questions;
+      console.log(accordionBody.textContent);
+      accordionBody.textContent = data.answers;
     }
   });
-});
+};
+
+// ===================================================================
+// retrieve data in real time
+const unsub = db
+  .collection("Q&A")
+  .orderBy("created_at", "desc")
+  .onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      const doc = change.doc;
+      if (change.type === "added") {
+        addQuestionsAndAnswers(doc.data(), doc.id);
+      } else if (change.type === "removed") {
+        deleteQuestionsAndAnswers(doc.id);
+      } else if (change.type === "modified") {
+        editQuestion(doc.data(), doc.id);
+      }
+    });
+  });
