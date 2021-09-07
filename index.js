@@ -53,6 +53,8 @@ const addQuestionsAndAnswers = (data, id) => {
 
 // =======================================================================
 // ---
+// Q&A
+
 // real time listener
 
 // delete in real time from ui
@@ -97,6 +99,51 @@ const unsub = db
         deleteQuestionsAndAnswers(doc.id);
       } else if (change.type === "modified") {
         editQuestion(doc.data(), doc.id);
+      }
+    });
+  });
+
+// =====================================================================================
+// ======================================================================================
+const aboutRow = document.querySelector(".aboutRow");
+
+// ---
+//About
+
+//
+const updateUi = (data, id) => {
+  let html = `
+  <div data-id="${id}" class="col holdAbout">
+  <p class="lead aboutText">
+   ${data.about}
+  </p>
+</div>
+  `;
+  aboutRow.innerHTML += html;
+};
+
+// edit
+const editAbout = (data, id) => {
+  let holdAbout = document.querySelector(".holdAbout");
+  if (holdAbout.getAttribute("data-id") === id) {
+    const colText = holdAbout.querySelector(".lead");
+    colText.textContent = data.about;
+  }
+};
+
+// ---
+// retrieve data in real time
+db.collection("About")
+  .orderBy("created_at", "desc")
+  .onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change, index) => {
+      const doc = change.doc;
+      // console.log(change);
+      if (change.type === "added") {
+        updateUi(doc.data(), doc.id, index);
+        console.log(doc.data(), doc.id);
+      } else if (change.type === "modified") {
+        editAbout(doc.data(), doc.id);
       }
     });
   });
