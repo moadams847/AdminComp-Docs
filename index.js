@@ -88,7 +88,7 @@ const editQuestion = (data, id) => {
 // ===================================================================
 // retrieve data in real time
 const unsub = db
-  .collection("Q&A")
+  .collection("FAQ")
   .orderBy("created_at", "desc")
   .onSnapshot((snapshot) => {
     snapshot.docChanges().forEach((change) => {
