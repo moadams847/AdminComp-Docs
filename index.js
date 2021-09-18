@@ -33,7 +33,7 @@ const addQuestionsAndAnswers = (data, id) => {
           aria-expanded="false"
           aria-controls="flush-collapse${id}"
         >
-          ${data.questions}
+          ${data.question}
         </button>
       </h2>
       <div
@@ -43,7 +43,7 @@ const addQuestionsAndAnswers = (data, id) => {
         data-bs-parent="#accordionFlushExample"
       >
         <div class="accordion-body">
-          <p class="lead">${data.answers}</p>
+          <p class="lead">${data.answer}</p>
         </div>
       </div>
     </div>
