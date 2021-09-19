@@ -78,9 +78,9 @@ const editQuestion = (data, id) => {
     if (accordionItem.getAttribute("data-id") === id) {
       console.log(data);
       console.log(accordionButton.textContent);
-      accordionButton.textContent = data.questions;
+      accordionButton.textContent = data.question;
       console.log(accordionBody.textContent);
-      accordionBody.textContent = data.answers;
+      accordionBody.textContent = data.answer;
     }
   });
 };
