@@ -73,11 +73,12 @@ const editQuestion = (data, id) => {
   const accordionItems = document.querySelectorAll(".accordion-item");
   accordionItems.forEach((accordionItem) => {
     if (accordionItem.getAttribute("data-id") === id) {
-      accordionItem.children[0].children[0].textContent = data.question;
-      accordionItem.children[0].children[0].textContent.trim();
+      accordionItem.children[0].children[0].innerText = data.question;
+      accordionItem.children[0].children[0].innerText.trim();
 
-      accordionItem.children[1].children[0].textContent = data.answer;
-      accordionItem.children[1].children[0].textContent.trim();
+      accordionItem.children[1].children[0].innerText = data.answer;
+      accordionItem.children[1].children[0].innerText.trim();
+      accordionItem.children[1].children[0].classList.add("lead");
     }
   });
 };
