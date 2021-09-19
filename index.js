@@ -71,16 +71,13 @@ const deleteQuestionsAndAnswers = (id) => {
 // // edit ui
 const editQuestion = (data, id) => {
   const accordionItems = document.querySelectorAll(".accordion-item");
-  const accordionButton = document.querySelector(".accordion-button");
-  const accordionBody = document.querySelector(".accordion-body");
-
   accordionItems.forEach((accordionItem) => {
     if (accordionItem.getAttribute("data-id") === id) {
-      console.log(data);
-      console.log(accordionButton.textContent);
-      accordionButton.textContent = data.question;
-      console.log(accordionBody.textContent);
-      accordionBody.textContent = data.answer;
+      accordionItem.children[0].children[0].textContent = data.question;
+      accordionItem.children[0].children[0].textContent.trim();
+
+      accordionItem.children[1].children[0].textContent = data.answer;
+      accordionItem.children[1].children[0].textContent.trim();
     }
   });
 };
@@ -141,7 +138,7 @@ db.collection("About")
       // console.log(change);
       if (change.type === "added") {
         updateUi(doc.data(), doc.id, index);
-        console.log(doc.data(), doc.id);
+        // console.log(doc.data(), doc.id);
       } else if (change.type === "modified") {
         editAbout(doc.data(), doc.id);
       }
