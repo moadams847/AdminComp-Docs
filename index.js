@@ -136,10 +136,8 @@ db.collection("About")
   .onSnapshot((snapshot) => {
     snapshot.docChanges().forEach((change, index) => {
       const doc = change.doc;
-      // console.log(change);
       if (change.type === "added") {
         updateUi(doc.data(), doc.id, index);
-        // console.log(doc.data(), doc.id);
       } else if (change.type === "modified") {
         editAbout(doc.data(), doc.id);
       }
