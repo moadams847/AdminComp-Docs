@@ -16,7 +16,13 @@ The main aim of this project to assist AdCU staff, specifically ITS support Offi
 
 ## Installation
 
-Clone Repo
+1. Clone Repo
+2. cd to the directory where cloned folder is locacted
+3. run: npm install in your shell
+
+```bash
+npm install
+```
 
 ## Tech/framework used
 
